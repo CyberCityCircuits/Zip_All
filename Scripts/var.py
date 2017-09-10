@@ -9,8 +9,8 @@ import os
 import datetime as dt
 
 app_name = "Zip All"
-version = "0.02.03"
-build_date = "06-27-2017"
+version = "0.02.04"
+build_date = "09-10-2017"
 
 email = "David@DREAM-Enterprise.com"
 name = app_name + "  V" + version

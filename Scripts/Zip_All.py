@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct 13 14:43:54 2016
-
-@author: Admin
+Zip_All
+David A Ray
+David@DREAM-Enterprise.com
 """
 
 #import libraries
@@ -20,45 +20,30 @@ os.system("color F")
 os.system("cls")
 os.system("echo off")
 
-#define commands
-def header():
-    os.system("cls")
+#copy zip to archive        
+def copy_zip():
     print ()
-    print ((var.name).center(var.cent_width))
-    print (var.email.center(var.cent_width))
-    print ()
-    sleep (1)
+    print ("  Placing compressed data into " + var.folder_bu + ".")
+    files = glob.iglob(os.path.join(var.cwd, "*.zip"))
+    for file in files:
+        if os.path.isfile(file):
+            shutil.copy2(file, var.folder_bu)
 
-#splashscreen
-def logo():  
+
+#delete any existing archive
+def del_bu():
+    if os.path.exists(var.folder_bu):
+        print ()
+        print ("  Deleting existing data in " + var.folder_bu + ".")
+        shutil.rmtree(var.folder_bu)
+
+def del_zip():
     print ()
-    print (("-----------------------------------------").center(var.cent_width))
-    print (("01011010 01001001 01010000").center(var.cent_width))
-    print (("        ________  ______  _______        ").center(var.cent_width))
-    print (("       /        |/      |/       \\      ").center(var.cent_width))
-    print (("       $$$$$$$$/ $$$$$$/ $$$$$$$  |      ").center(var.cent_width))
-    print (("           /$$/    $$ |  $$ |__$$ |      ").center(var.cent_width))
-    print (("          /$$/     $$ |  $$    $$/       ").center(var.cent_width))
-    print (("         /$$/      $$ |  $$$$$$$/        ").center(var.cent_width))
-    print (("        /$$/____  _$$ |_ $$ |            ").center(var.cent_width))
-    print (("       /$$      |/ $$   |$$ |            ").center(var.cent_width))
-    print (("       $$$$$$$$/ $$$$$$/ $$/             ").center(var.cent_width))
-    print (("         ______   __        __           ").center(var.cent_width))
-    print (("        /      \ /  |      /  |          ").center(var.cent_width))
-    print (("       /$$$$$$  |$$ |      $$ |          ").center(var.cent_width))
-    print (("       $$ |__$$ |$$ |      $$ |          ").center(var.cent_width))
-    print (("       $$    $$ |$$ |      $$ |          ").center(var.cent_width))
-    print (("       $$$$$$$$ |$$ |      $$ |          ").center(var.cent_width))
-    print (("       $$ |  $$ |$$ |_____ $$ |_____     ").center(var.cent_width))
-    print (("       $$ |  $$ |$$       |$$       |    ").center(var.cent_width))     
-    print (("       $$/   $$/ $$$$$$$$/ $$$$$$$$/     ").center(var.cent_width))   
-    print ()
-    print (("01000001 01001100 01001100").center(var.cent_width))
-    print (("-----------------------------------------").center(var.cent_width))
-    print ((var.name + " - " + var.build_date).center(var.cent_width))
-    print (("David A Ray").center(var.cent_width))
-    print ((var.email).center(var.cent_width))
-    print ()
+    print ("  Cleaning up...")
+    filelist = [ f for f in os.listdir(".") if f.endswith(".zip") ]
+    for f in filelist:
+        os.remove(f)
+    print()
 
 #disclaimer
 def disclaimer():
@@ -99,13 +84,53 @@ def end():
     print ("  Program ending...")
     sleep(var.wait)
     sys.exit()
-   
-#delete any existing archive
-def del_bu():
-    if os.path.exists(var.folder_bu):
-        print ()
-        print ("  Deleting existing data in " + var.folder_bu + ".")
-        shutil.rmtree(var.folder_bu)
+    
+#splashscreen
+def logo():  
+    print ()
+    print (("-----------------------------------------").center(var.cent_width))
+    print (("01011010 01001001 01010000").center(var.cent_width))
+    print (("        ________  ______  _______        ").center(var.cent_width))
+    print (("       /        |/      |/       \\      ").center(var.cent_width))
+    print (("       $$$$$$$$/ $$$$$$/ $$$$$$$  |      ").center(var.cent_width))
+    print (("           /$$/    $$ |  $$ |__$$ |      ").center(var.cent_width))
+    print (("          /$$/     $$ |  $$    $$/       ").center(var.cent_width))
+    print (("         /$$/      $$ |  $$$$$$$/        ").center(var.cent_width))
+    print (("        /$$/____  _$$ |_ $$ |            ").center(var.cent_width))
+    print (("       /$$      |/ $$   |$$ |            ").center(var.cent_width))
+    print (("       $$$$$$$$/ $$$$$$/ $$/             ").center(var.cent_width))
+    print (("         ______   __        __           ").center(var.cent_width))
+    print (("        /      \ /  |      /  |          ").center(var.cent_width))
+    print (("       /$$$$$$  |$$ |      $$ |          ").center(var.cent_width))
+    print (("       $$ |__$$ |$$ |      $$ |          ").center(var.cent_width))
+    print (("       $$    $$ |$$ |      $$ |          ").center(var.cent_width))
+    print (("       $$$$$$$$ |$$ |      $$ |          ").center(var.cent_width))
+    print (("       $$ |  $$ |$$ |_____ $$ |_____     ").center(var.cent_width))
+    print (("       $$ |  $$ |$$       |$$       |    ").center(var.cent_width))     
+    print (("       $$/   $$/ $$$$$$$$/ $$$$$$$$/     ").center(var.cent_width))   
+    print ()
+    print (("01000001 01001100 01001100").center(var.cent_width))
+    print (("-----------------------------------------").center(var.cent_width))
+    print ((var.name + " - " + var.build_date).center(var.cent_width))
+    print (("David A Ray").center(var.cent_width))
+    print ((var.email).center(var.cent_width))
+    print ()
+                            
+#make archive folder
+def mk_bu():
+    print ()
+    print ("  Creating new " + var.folder_bu + " folder.")       
+    if not os.path.exists(var.folder_bu):
+        os.makedirs(var.folder_bu)
+
+#define commands
+def header():
+    os.system("cls")
+    print ()
+    print ((var.name).center(var.cent_width))
+    print (var.email.center(var.cent_width))
+    print ()
+    sleep (1)
 
 #zip all folders
 def zip_all():
@@ -132,34 +157,7 @@ def zip_all():
             shutil.copy2(subdir+".zip", var.folder_bu)
             os.remove(subdir+".zip")
         sleep(.01)
-                            
-#make archive folder
-def mk_bu():
-    print ()
-    print ("  Creating new " + var.folder_bu + " folder.")       
-    if not os.path.exists(var.folder_bu):
-        os.makedirs(var.folder_bu)
-
-#writes readme file        
-
-#copy zip to archive        
-def copy_zip():
-    print ()
-    print ("  Placing compressed data into " + var.folder_bu + ".")
-    files = glob.iglob(os.path.join(var.cwd, "*.zip"))
-    for file in files:
-        if os.path.isfile(file):
-            shutil.copy2(file, var.folder_bu)
-
-def del_zip():
-    print ()
-    print ("  Cleaning up...")
-    filelist = [ f for f in os.listdir(".") if f.endswith(".zip") ]
-    for f in filelist:
-        os.remove(f)
-    print()
-
-   
+        
 #run commands
 if __name__ == "__main__":
     logo()
